@@ -1,0 +1,9 @@
+version: '3.4'
+services:
+  fibonacci:
+    build: ./fibonacci
+    container_name: fibonacci
+    ports:
+      - 8080:8080
+    network_mode: host
+    restart: on-failure
