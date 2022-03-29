@@ -1,23 +1,27 @@
 package com.eightxeight.fibonacci.validation;
 
-import com.eightxeight.fibonacci.exceptions.InvalidFibonacciNumberLimit;
-import com.eightxeight.fibonacci.exceptions.InvalidFibonacciNumberToBlacklist;
+import com.eightxeight.fibonacci.exceptions.InvalidNumber;
+import com.eightxeight.fibonacci.exceptions.InvalidFibonacciNumberForBlacklist;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ControllerValidator {
 
-    public int validateFibonacciNumberLimit(String limit) throws InvalidFibonacciNumberLimit {
+    public int validateNumber(String limit) throws InvalidNumber {
         try {
-            return Integer.parseInt(limit);
+            int parsedInt = Integer.parseInt(limit);
+            if (parsedInt < 0) {
+                throw new InvalidNumber();
+            }
+            return parsedInt;
         } catch (NumberFormatException e) {
-            throw new InvalidFibonacciNumberLimit();
+            throw new InvalidNumber();
         }
     }
 
-    public void validateFibonacciNumberToBlacklist(int number) throws InvalidFibonacciNumberToBlacklist {
+    public void validateFibonacciNumberForBlacklist(int number) throws InvalidFibonacciNumberForBlacklist {
         if (!isFibonacciNumber(number)) {
-            throw new InvalidFibonacciNumberToBlacklist();
+            throw new InvalidFibonacciNumberForBlacklist();
         }
     }
 
